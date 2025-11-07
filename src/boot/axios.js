@@ -1,4 +1,4 @@
-import { defineBoot } from '#q-app/wrappers'
+/*import { defineBoot } from '#q-app/wrappers'
 import axios from 'axios'
 
 // Be careful when using SSR for cross-request state pollution
@@ -21,4 +21,23 @@ export default defineBoot(({ app }) => {
   //       so you can easily perform requests against your app's API
 })
 
+export { api }
+*/
+
+import { boot } from 'quasar/wrappers'
+import axios from 'axios'
+
+// Cria uma instância do Axios com a URL base do seu JSON Server
+const api = axios.create({ baseURL: 'http://localhost:3000/' })
+
+export default boot(({ app }) => {
+  // Injeta o axios (a biblioteca padrão) no contexto global do Vue
+  app.config.globalProperties.$axios = axios
+
+  // Injeta a nossa instância 'api' configurada (para usar this.$api no Options API)
+  // Esta é a instância que aponta para o JSON Server
+  app.config.globalProperties.$api = api
+})
+
+// Exporta a instância 'api' para uso no Composition API (como você fez no ClientesPage.vue)
 export { api }

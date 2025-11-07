@@ -1,0 +1,271 @@
+{
+  "clientes": [
+    {
+      "nome": "Bruno Arende",
+      "cpf": "678.104.987-00",
+      "telefone": "(45) 99876-0911",
+      "email": "bruno@horus.com",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "nome": "Claudir Silva",
+      "cpf": "980.765.123-99",
+      "telefone": "(45) 97899-0353",
+      "email": "claudir@horus.com"
+    },
+    {
+      "id": "3",
+      "nome": "Jucilene Davila",
+      "cpf": "008.115.112-84",
+      "telefone": "(45) 99190-9817",
+      "email": "jucilene@horus.com"
+    },
+    {
+      "id": "4",
+      "nome": "Karen Oliveira",
+      "cpf": "791.853.761-31",
+      "telefone": "(45) 98647-3126",
+      "email": "karen@horus.com"
+    },
+    {
+      "id": "5354",
+      "nome": "koas",
+      "cpf": "",
+      "telefone": "",
+      "email": "koas@gmail.com"
+    },
+    {
+      "id": "700f",
+      "nome": "jose",
+      "cpf": "1111",
+      "telefone": "1111",
+      "email": "jose@gmail.com"
+    },
+    {
+      "id": "106b",
+      "nome": "kerido",
+      "cpf": "",
+      "telefone": "",
+      "email": "kerido@gmail.com"
+    },
+    {
+      "id": "1543",
+      "nome": "3123",
+      "cpf": "",
+      "telefone": "",
+      "email": "32123@gmail.com"
+    },
+    {
+      "id": "991a",
+      "nome": "3123",
+      "cpf": "",
+      "telefone": "",
+      "email": "32123@gmail.com"
+    },
+    {
+      "id": "befe",
+      "nome": "3123",
+      "cpf": "",
+      "telefone": "",
+      "email": "32123@gmail.com"
+    },
+    {
+      "id": "80dd",
+      "nome": "3123",
+      "cpf": "",
+      "telefone": "",
+      "email": "32123@gmail.com"
+    },
+    {
+      "id": "30cb",
+      "nome": "3123",
+      "cpf": "",
+      "telefone": "",
+      "email": "32123@gmail.com"
+    },
+    {
+      "id": "7b05",
+      "nome": "3123",
+      "cpf": "",
+      "telefone": "",
+      "email": "32123@gmail.com"
+    },
+    {
+      "id": "2ce3",
+      "nome": "3123",
+      "cpf": "",
+      "telefone": "",
+      "email": "32123@gmail.com"
+    },
+    {
+      "id": "049d",
+      "nome": "12312",
+      "cpf": "",
+      "telefone": "",
+      "email": "32123@gmail.com"
+    },
+    {
+      "id": "a204",
+      "nome": "12312",
+      "cpf": "",
+      "telefone": "",
+      "email": "32123@gmail.com"
+    },
+    {
+      "id": "d084",
+      "nome": "12312",
+      "cpf": "",
+      "telefone": "",
+      "email": "32123@gmail.com"
+    },
+    {
+      "id": "79a4",
+      "nome": "12312",
+      "cpf": "",
+      "telefone": "",
+      "email": "32123@gmail.com"
+    },
+    {
+      "id": "5f7b",
+      "nome": "Bruno arend",
+      "cpf": "",
+      "telefone": "",
+      "email": "bruno@gmail.com"
+    },
+    {
+      "id": "3f95",
+      "nome": "Bruno arend",
+      "cpf": "",
+      "telefone": "",
+      "email": "bruno@gmail.com"
+    },
+    {
+      "id": "e0a4",
+      "nome": "12312",
+      "cpf": "",
+      "telefone": "",
+      "email": "11@gmail.com"
+    }
+  ],
+  "veiculos": [
+    {
+      "id": "1",
+      "placa": "ABC-9333",
+      "marca": "Chevrolet",
+      "modelo": "Onix",
+      "disponibilidade": "Disponível",
+      "quilometragem": 12000,
+      "categoria": "Hatch"
+    },
+    {
+      "id": "2",
+      "placa": "AYC-8955",
+      "marca": "Fiat",
+      "modelo": "Uno",
+      "disponibilidade": "Disponível",
+      "quilometragem": 45000,
+      "categoria": "Hatch"
+    },
+    {
+      "id": "3",
+      "placa": "YAS-9087",
+      "marca": "Volvo",
+      "modelo": "EX-30",
+      "disponibilidade": "Indisponível",
+      "quilometragem": 6000,
+      "categoria": "SUV"
+    },
+    {
+      "id": "4",
+      "placa": "IOP-0906",
+      "marca": "Chevrolet",
+      "modelo": "Cruze",
+      "disponibilidade": "Disponível",
+      "quilometragem": 23000,
+      "categoria": "Sedan"
+    },
+    {
+      "id": "5",
+      "placa": "DEF-5678",
+      "marca": "Honda",
+      "modelo": "Civic (2023)",
+      "disponibilidade": "Em Movimento",
+      "quilometragem": 8000,
+      "categoria": "Sedan"
+    },
+    {
+      "id": "6",
+      "placa": "IKL-1234",
+      "marca": "Toyota",
+      "modelo": "Corolla (2022)",
+      "disponibilidade": "Em Movimento",
+      "quilometragem": 15000,
+      "categoria": "Sedan"
+    }
+  ],
+  "reservas": [
+    {
+      "id": "1",
+      "cliente": "João Silva",
+      "veiculo": "Honda Civic (DEF-5678)",
+      "dataInicio": "14/01/2024",
+      "dataFim": "19/01/2024",
+      "status": "Ativa"
+    },
+    {
+      "id": "2",
+      "cliente": "Maria Santos",
+      "veiculo": "Toyota Corolla (IKL-1234)",
+      "dataInicio": "03/01/2024",
+      "dataFim": "11/01/2024",
+      "status": "Ativa"
+    },
+    {
+      "id": "3",
+      "cliente": "Pedro Oliveira",
+      "veiculo": "Volkswagen Polo (GHI-9012)",
+      "dataInicio": "24/01/2024",
+      "dataFim": "29/01/2024",
+      "status": "Ativa"
+    },
+    {
+      "id": "4",
+      "cliente": "Cleitinho Fuba",
+      "veiculo": "Volkswagen Nivus (UIA-7890)",
+      "dataInicio": "09/01/2024",
+      "dataFim": "10/01/2024",
+      "status": "Concluída"
+    }
+  ],
+  "categorias": [
+    {
+      "id": "1",
+      "nome": "Econômico",
+      "descricao": "Veículos compactos e econômicos",
+      "valorDiaria": 80,
+      "disponiveis": 6
+    },
+    {
+      "id": "2",
+      "nome": "Intermediário",
+      "descricao": "Veículos de porte médio com bom custo-benefício e conforto.",
+      "valorDiaria": 120,
+      "disponiveis": 3
+    },
+    {
+      "id": "3",
+      "nome": "Executivo",
+      "descricao": "Veículos premium com alto padrão de conforto e tecnologia.",
+      "valorDiaria": 180,
+      "disponiveis": 5
+    },
+    {
+      "id": "4",
+      "nome": "SUV",
+      "descricao": "Veículos robustos e espaçosos, ideais para famílias e aventuras.",
+      "valorDiaria": 200,
+      "disponiveis": 4
+    }
+  ]
+}

@@ -1,21 +1,29 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
+    <q-drawer
+      show-if-above
+      :mini="miniState"
+      @mouseover="miniState = false"
+      @mouseout="miniState = true"
+      :width="200"
+      :breakpoint="500"
+      class="bg-dark-blue"
+    >
+      <q-scroll-area class="fit">
+        <div class="q-py-md text-white text-center">
+          <div class="text-h6">ArendLocadora</div>
+          <q-separator dark class="q-my-sm" />
+        </div>
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
-
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item-label header> Essential Links </q-item-label>
-
-        <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" />
-      </q-list>
+        <q-list padding dark>
+          <EssentialLink
+            v-for="link in essentialLinks"
+            :key="link.title"
+            v-bind="link"
+            :to="link.link"
+          />
+        </q-list>
+      </q-scroll-area>
     </q-drawer>
 
     <q-page-container>
@@ -25,57 +33,56 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import { ref } from 'vue';
+import EssentialLink from 'components/EssentialLink.vue';
 
-const linksList = [
+// Definição dos links de navegação para o menu lateral
+const essentialLinks = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev',
+    title: 'Dashboard',
+    icon: 'dashboard',
+    link: '/dashboard',
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework',
+    title: 'Clientes',
+    icon: 'people',
+    link: '/dashboard/clientes',
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev',
+    title: 'Veículos',
+    icon: 'directions_car',
+    link: '/dashboard/veiculos',
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev',
+    title: 'Reservas',
+    icon: 'event_available',
+    link: '/dashboard/reservas',
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev',
+    title: 'Categorias',
+    icon: 'category',
+    link: '/dashboard/categorias',
   },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev',
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev',
-  },
-]
+];
 
-const leftDrawerOpen = ref(false)
-
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
+const miniState = ref(true); // Começa "mini" e expande no hover
 </script>
+
+<style lang="scss">
+.bg-dark-blue {
+  background: #2f3651 !important; // Cor de fundo do menu lateral
+  color: white;
+}
+.q-drawer {
+    .q-item {
+        color: rgba(255, 255, 255, 0.7);
+        border-left: 5px solid transparent;
+
+        &.q-router-link--active {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            border-left-color: #5887ff; // Cor de destaque do item ativo
+        }
+    }
+}
+</style>
