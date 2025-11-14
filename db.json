@@ -1,7 +1,7 @@
 {
   "clientes": [
     {
-      "nome": "Bruno Arende",
+      "nome": "Bruno Elian Arend Renomeado",
       "cpf": "678.104.987-00",
       "telefone": "(45) 99876-0911",
       "email": "bruno@horus.com",
@@ -29,60 +29,11 @@
       "email": "karen@horus.com"
     },
     {
-      "id": "5354",
-      "nome": "koas",
-      "cpf": "",
-      "telefone": "",
-      "email": "koas@gmail.com"
-    },
-    {
       "id": "700f",
       "nome": "jose",
       "cpf": "1111",
       "telefone": "1111",
       "email": "jose@gmail.com"
-    },
-    {
-      "id": "106b",
-      "nome": "kerido",
-      "cpf": "",
-      "telefone": "",
-      "email": "kerido@gmail.com"
-    },
-    {
-      "id": "1543",
-      "nome": "3123",
-      "cpf": "",
-      "telefone": "",
-      "email": "32123@gmail.com"
-    },
-    {
-      "id": "991a",
-      "nome": "3123",
-      "cpf": "",
-      "telefone": "",
-      "email": "32123@gmail.com"
-    },
-    {
-      "id": "befe",
-      "nome": "3123",
-      "cpf": "",
-      "telefone": "",
-      "email": "32123@gmail.com"
-    },
-    {
-      "id": "80dd",
-      "nome": "3123",
-      "cpf": "",
-      "telefone": "",
-      "email": "32123@gmail.com"
-    },
-    {
-      "id": "30cb",
-      "nome": "3123",
-      "cpf": "",
-      "telefone": "",
-      "email": "32123@gmail.com"
     },
     {
       "id": "7b05",
@@ -92,28 +43,7 @@
       "email": "32123@gmail.com"
     },
     {
-      "id": "2ce3",
-      "nome": "3123",
-      "cpf": "",
-      "telefone": "",
-      "email": "32123@gmail.com"
-    },
-    {
-      "id": "049d",
-      "nome": "12312",
-      "cpf": "",
-      "telefone": "",
-      "email": "32123@gmail.com"
-    },
-    {
       "id": "a204",
-      "nome": "12312",
-      "cpf": "",
-      "telefone": "",
-      "email": "32123@gmail.com"
-    },
-    {
-      "id": "d084",
       "nome": "12312",
       "cpf": "",
       "telefone": "",
@@ -127,25 +57,39 @@
       "email": "32123@gmail.com"
     },
     {
-      "id": "5f7b",
-      "nome": "Bruno arend",
-      "cpf": "",
-      "telefone": "",
-      "email": "bruno@gmail.com"
+      "id": "c807",
+      "nome": "teste",
+      "cpf": "99999999",
+      "telefone": "999999",
+      "email": "bixeira@gmail.com.br"
     },
     {
-      "id": "3f95",
-      "nome": "Bruno arend",
-      "cpf": "",
-      "telefone": "",
-      "email": "bruno@gmail.com"
+      "id": "e0dc",
+      "nome": "teste",
+      "cpf": "1231231231",
+      "telefone": "49031231",
+      "email": "teste@gmail.com"
     },
     {
-      "id": "e0a4",
-      "nome": "12312",
+      "nome": "testePinia",
       "cpf": "",
       "telefone": "",
-      "email": "11@gmail.com"
+      "email": "kra@gmail.com.br",
+      "id": "af3e"
+    },
+    {
+      "id": "9d0b",
+      "nome": "ChicoAni",
+      "cpf": "78123013388",
+      "telefone": "4909312313",
+      "email": "Chiq@gmail.com"
+    },
+    {
+      "id": "bf7b",
+      "nome": "teste",
+      "cpf": "12313",
+      "telefone": "1231",
+      "email": "dasda@gmail.com"
     }
   ],
   "veiculos": [
@@ -240,11 +184,11 @@
   ],
   "categorias": [
     {
-      "id": "1",
       "nome": "Econômico",
       "descricao": "Veículos compactos e econômicos",
       "valorDiaria": 80,
-      "disponiveis": 6
+      "disponiveis": 6,
+      "id": "1"
     },
     {
       "id": "2",

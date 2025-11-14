@@ -16,13 +16,12 @@
 
     <div class="q-pa-lg">
       <q-table
-        :rows="clientes"
+        :rows="clientesStore.clientes" 
         :columns="columns"
         row-key="id"
-        :loading="loading"
+        :loading="clientesStore.loading" 
         flat
         no-data-label="Nenhum cliente encontrado."
-
         :rows-per-page-options="[15]" 
         :pagination="{ rowsPerPage: 15 }" 
       >
@@ -44,7 +43,7 @@
               flat 
               dense 
               color="red" 
-              @click="deleteCliente(props.row.id)" 
+              @click="confirmDelete(props.row.id)"
             />
           </q-td>
         </template>
@@ -62,13 +61,14 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { api } from 'boot/axios'; 
-import { useQuasar } from 'quasar';
+import { useQuasar } from 'quasar'; // CORRIGIDO: useQuasar deve ser importado
+import { useClientesStore } from 'stores/clientes'; // Import da Store Pinia
 import ClienteFormDialog from 'components/ClienteFormDialog.vue';
 
-const $q = useQuasar();
-const clientes = ref([]);
-const loading = ref(true);
+// Injeção correta do Quasar
+const $q = useQuasar(); 
+// Inicialização e uso da Store Pinia
+const clientesStore = useClientesStore(); 
 
 const showModal = ref(false); 
 const clienteToEdit = ref({}); 
@@ -81,72 +81,40 @@ const columns = [
   { name: 'acoes', label: 'Ações', align: 'center', field: 'acoes' }
 ];
 
-// READ: Busca e Atualização dos dados
-async function fetchClientes() {
-  try {
-    loading.value = true;
-    const response = await api.get('clientes'); 
-    clientes.value = response.data;
-  } catch (error) {
-    console.error('Erro ao buscar clientes:', error);
-    $q.notify({
-        type: 'negative',
-        message: 'Erro ao carregar dados. Verifique se o JSON Server está rodando.'
-    });
-  } finally {
-    loading.value = false;
-  }
-}
+// READ: Busca os dados ao montar o componente
+onMounted(() => {
+  clientesStore.fetchClientes();
+});
 
-// DELETE: Excluir um cliente
-function deleteCliente(id) {
-  $q.dialog({
-    title: 'Confirmação',
-    message: 'Tem certeza que deseja excluir este cliente?',
-    cancel: true,
-    persistent: true
-  }).onOk(async () => {
-    try {
-      await api.delete(`clientes/${id}`);
-      
-      //  Remove o cliente da lista local
-      clientes.value = clientes.value.filter(c => c.id !== id);
-      
-      $q.notify({
-        type: 'positive',
-        message: 'Cliente excluído com sucesso!'
-      });
-    } catch (error) {
-      console.error('Erro ao excluir cliente:', error);
-      $q.notify({
-        type: 'negative',
-        message: 'Erro ao excluir cliente. Tente novamente.'
-      });
-    }
-  });
-}
-
-// CREATE: Abre o modal para adicionar novo cliente
+// CREATE & UPDATE: Abre o modal para adicionar ou editar
 function openAddModal() {
   clienteToEdit.value = { id: null, nome: '', cpf: '', telefone: '', email: '' }; 
   showModal.value = true;
 }
 
-// UPDATE: Abre o modal para editar cliente existente
 function openEditModal(cliente) {
   clienteToEdit.value = cliente; 
   showModal.value = true;
 }
 
-// FUNÇÃO CHAVE: Chamada quando o modal emite 'cliente-saved' para recarregar a lista
+// FUNÇÃO CHAVE: Chamada quando o modal emite 'cliente-saved'
 function handleClienteSaved() {
-  fetchClientes(); 
+  // Chama a ação do Pinia para recarregar a lista
+  clientesStore.fetchClientes(); 
 }
 
-// Hook de inicialização
-onMounted(() => {
-  fetchClientes();
-});
+// DELETE: Confirmação e chamada da ação de exclusão no Pinia
+function confirmDelete(id) {
+  $q.dialog({
+    title: 'Confirmação',
+    message: 'Tem certeza que deseja excluir este cliente?',
+    cancel: true,
+    persistent: true
+  }).onOk(() => {
+    // Chama a ação de exclusão da Store Pinia
+    clientesStore.deleteCliente(id); 
+  });
+}
 </script>
 
 <style lang="scss" scoped>

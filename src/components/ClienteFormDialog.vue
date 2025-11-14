@@ -52,7 +52,7 @@
 <script setup>
 import { ref, watch, computed } from 'vue';
 import { api } from 'boot/axios';
-import { useQuasar } from 'quasar'; // Importado
+import { Notify } from 'quasar'; // Importa Notify diretamente
 
 const props = defineProps({
   modelValue: {
@@ -67,8 +67,8 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'clienteSaved']);
 
-// CORRIGIDO: Chamada do useQuasar() para usar $q.notify
-const $q = useQuasar(); 
+// NÃO É NECESSÁRIO useQuasar() AQUI!
+// const $q = useQuasar(); // <<-- REMOVIDO
 
 const loading = ref(false);
 const clienteData = ref({});
@@ -81,12 +81,12 @@ watch(() => props.cliente, (newCliente) => {
 }, { immediate: true });
 
 async function validateAndSave() {
-  // Valida o formulário antes de tentar salvar
   const isValid = await formRef.value.validate();
   if (isValid) {
     saveCliente();
   } else {
-    $q.notify({
+    // Usando Notify.create()
+    Notify.create({
         type: 'warning',
         message: 'Por favor, preencha todos os campos obrigatórios.'
     });
@@ -98,7 +98,6 @@ async function saveCliente() {
   try {
     let response;
     
-    // Payload com os dados limpos para evitar enviar propriedades desnecessárias
     const payload = {
       nome: clienteData.value.nome,
       cpf: clienteData.value.cpf,
@@ -107,28 +106,28 @@ async function saveCliente() {
     };
     
     if (isEditing.value) {
-      // MODO EDIÇÃO (PUT)
       response = await api.put(`clientes/${clienteData.value.id}`, payload);
     } else {
-      // MODO CRIAÇÃO (POST)
       response = await api.post('clientes', payload);
     }
 
-    $q.notify({
+    // Usando Notify.create() para sucesso
+    Notify.create({ 
       type: 'positive',
       message: `Cliente ${isEditing.value ? 'editado' : 'adicionado'} com sucesso!`,
       timeout: 1500
     });
     
-    emit('update:modelValue', false);
+    // As linhas de atualização da UI (fechamento e recarga)
+    emit('update:modelValue', false); 
     emit('clienteSaved', response.data);
 
   } catch (error) {
     console.error('Erro ao salvar cliente:', error);
-    // Notificação de erro mais robusta
-    $q.notify({
+    // Usando Notify.create() para erro
+    Notify.create({
       type: 'negative',
-      message: `Erro ao salvar cliente. Verifique o JSON Server ou a conexão. Detalhes: ${error.message}`
+      message: `Erro ao salvar cliente. Detalhes: ${error.message}`
     });
   } finally {
     loading.value = false;
