@@ -68,11 +68,11 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useQuasar } from 'quasar';
-import { useCategoriasStore } from 'stores/categorias'; // Import da Store Pinia
+import { useCategoriasVeiculosStore } from 'stores/categoriasVeiculos'; 
 import CategoriaFormDialog from 'components/CategoriaFormDialog.vue';
 
 const $q = useQuasar();
-const categoriasStore = useCategoriasStore(); 
+const categoriasStore = useCategoriasVeiculosStore(); 
 
 const showModal = ref(false); 
 const categoriaToEdit = ref({}); 
@@ -80,7 +80,6 @@ const categoriaToEdit = ref({});
 const columns = [
   { name: 'nome', required: true, label: 'Categoria', align: 'left', field: 'nome', sortable: true },
   { name: 'descricao', label: 'Veículo', align: 'left', field: 'descricao' },
-  // Usamos o campo formatado para exibição
   { name: 'valorDiariaFormatado', label: 'Valor Diária', align: 'left', field: 'valorDiariaFormatado' }, 
   { name: 'disponiveis', label: 'Veículos Disponíveis', align: 'center', field: 'disponiveis' },
   { name: 'acoes', label: 'Ações', align: 'center', field: 'acoes' }
@@ -126,7 +125,6 @@ function confirmDelete(id) {
   min-height: 80px; 
   box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2), 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12);
 }
-// Estilos da tabela (mantidos do ClientesPage)
 .q-table {
   thead {
     th {

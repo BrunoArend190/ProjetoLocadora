@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
-import { api } from 'boot/axios'; 
 import { Notify } from 'quasar';
+import categoriaService from 'src/services/categoriaService'; // Importa o Service Layer
 
-export const useCategoriasStore = defineStore('categorias', {
+export const useCategoriasVeiculosStore = defineStore('categoriasVeiculos', {
   state: () => ({
     categorias: [],
     loading: false,
@@ -12,14 +12,15 @@ export const useCategoriasStore = defineStore('categorias', {
     async fetchCategorias() {
       this.loading = true;
       try {
-        const response = await api.get('categorias'); 
-        this.categorias = response.data.map(cat => ({
+        // Store chama o Service
+        const data = await categoriaService.getAll(); 
+        
+        this.categorias = data.map(cat => ({
           ...cat,
-          // Formata o valor da diária para exibição (R$ XX,00)
           valorDiariaFormatado: `R$ ${cat.valorDiaria.toFixed(2).replace('.', ',')}` 
         }));
       } catch (error) {
-        console.error('Erro ao buscar categorias:', error);
+        console.error('Erro ao buscar categorias (Service Layer):', error);
         Notify.create({
           type: 'negative',
           message: 'Erro ao carregar lista de categorias.'
@@ -29,10 +30,10 @@ export const useCategoriasStore = defineStore('categorias', {
       }
     },
 
-    // Ação para deletar (necessita confirmação no componente)
     async deleteCategoria(id) {
       try {
-        await api.delete(`categorias/${id}`);
+        // Store chama o Service
+        await categoriaService.delete(id);
         this.categorias = this.categorias.filter(c => c.id !== id);
         
         Notify.create({
@@ -40,7 +41,7 @@ export const useCategoriasStore = defineStore('categorias', {
           message: 'Categoria excluída com sucesso!'
         });
       } catch (error) {
-        console.error('Erro ao excluir categoria:', error);
+        console.error('Erro ao excluir categoria (Service Layer):', error);
         Notify.create({
           type: 'negative',
           message: 'Erro ao excluir categoria.'
@@ -48,7 +49,6 @@ export const useCategoriasStore = defineStore('categorias', {
       }
     },
     
-    // Ação genérica para salvar (usada para forçar o re-fetch após o modal)
     async saveCategoria() {
         await this.fetchCategorias();
     }

@@ -51,14 +51,11 @@
 
 <script setup>
 import { ref, watch, computed } from 'vue';
-import { api } from 'boot/axios';
-import { Notify } from 'quasar'; // Importa Notify diretamente
+import { Notify } from 'quasar';
+import clienteService from 'src/services/clienteService'; // Importa o Service Layer
 
 const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    required: true
-  },
+  modelValue: { type: Boolean, required: true },
   cliente: {
     type: Object,
     default: () => ({ id: null, nome: '', cpf: '', telefone: '', email: '' })
@@ -66,9 +63,6 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:modelValue', 'clienteSaved']);
-
-// NÃO É NECESSÁRIO useQuasar() AQUI!
-// const $q = useQuasar(); // <<-- REMOVIDO
 
 const loading = ref(false);
 const clienteData = ref({});
@@ -85,7 +79,6 @@ async function validateAndSave() {
   if (isValid) {
     saveCliente();
   } else {
-    // Usando Notify.create()
     Notify.create({
         type: 'warning',
         message: 'Por favor, preencha todos os campos obrigatórios.'
@@ -96,8 +89,6 @@ async function validateAndSave() {
 async function saveCliente() {
   loading.value = true;
   try {
-    let response;
-    
     const payload = {
       nome: clienteData.value.nome,
       cpf: clienteData.value.cpf,
@@ -106,25 +97,25 @@ async function saveCliente() {
     };
     
     if (isEditing.value) {
-      response = await api.put(`clientes/${clienteData.value.id}`, payload);
+      // CHAMA O SERVICE PARA UPDATE
+      await clienteService.update(clienteData.value.id, payload);
     } else {
-      response = await api.post('clientes', payload);
+      // CHAMA O SERVICE PARA CREATE
+      await clienteService.create(payload);
     }
 
-    // Usando Notify.create() para sucesso
     Notify.create({ 
       type: 'positive',
       message: `Cliente ${isEditing.value ? 'editado' : 'adicionado'} com sucesso!`,
       timeout: 1500
     });
     
-    // As linhas de atualização da UI (fechamento e recarga)
+    // Fecha o modal e notifica a página principal para recarregar
     emit('update:modelValue', false); 
-    emit('clienteSaved', response.data);
+    emit('clienteSaved'); 
 
   } catch (error) {
-    console.error('Erro ao salvar cliente:', error);
-    // Usando Notify.create() para erro
+    console.error('Erro ao salvar cliente (Service Layer):', error);
     Notify.create({
       type: 'negative',
       message: `Erro ao salvar cliente. Detalhes: ${error.message}`

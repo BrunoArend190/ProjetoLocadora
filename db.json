@@ -36,13 +36,6 @@
       "email": "jose@gmail.com"
     },
     {
-      "id": "7b05",
-      "nome": "3123",
-      "cpf": "",
-      "telefone": "",
-      "email": "32123@gmail.com"
-    },
-    {
       "id": "a204",
       "nome": "12312",
       "cpf": "",
@@ -83,24 +76,17 @@
       "cpf": "78123013388",
       "telefone": "4909312313",
       "email": "Chiq@gmail.com"
-    },
-    {
-      "id": "bf7b",
-      "nome": "teste",
-      "cpf": "12313",
-      "telefone": "1231",
-      "email": "dasda@gmail.com"
     }
   ],
   "veiculos": [
     {
-      "id": "1",
       "placa": "ABC-9333",
       "marca": "Chevrolet",
       "modelo": "Onix",
-      "disponibilidade": "Disponível",
+      "categoria": "Hatch",
       "quilometragem": 12000,
-      "categoria": "Hatch"
+      "disponibilidade": "Disponível",
+      "id": "1"
     },
     {
       "id": "2",
@@ -180,6 +166,14 @@
       "dataInicio": "09/01/2024",
       "dataFim": "10/01/2024",
       "status": "Concluída"
+    },
+    {
+      "cliente": "Bruno Elian Arend Renomeado",
+      "veiculo": "Onix (ABC-9333)",
+      "dataInicio": "2025-11-17",
+      "dataFim": "2025-11-19",
+      "status": "Concluída",
+      "id": "c4c5"
     }
   ],
   "categorias": [
@@ -210,6 +204,13 @@
       "descricao": "Veículos robustos e espaçosos, ideais para famílias e aventuras.",
       "valorDiaria": 200,
       "disponiveis": 4
+    },
+    {
+      "id": "759e",
+      "nome": "tqsda",
+      "descricao": "",
+      "valorDiaria": 12312,
+      "disponiveis": 0
     }
   ]
 }

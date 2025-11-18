@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import { api } from 'boot/axios'; 
 import { Notify } from 'quasar';
+import clienteService from 'src/services/clienteService'; // Importa o Service Layer
 
 export const useClientesStore = defineStore('clientes', {
   state: () => ({
@@ -9,7 +9,6 @@ export const useClientesStore = defineStore('clientes', {
   }),
 
   getters: {
-    // Exemplo de um getter, útil para transformações de dados
     totalClientes: (state) => state.clientes.length,
   },
 
@@ -18,33 +17,27 @@ export const useClientesStore = defineStore('clientes', {
     async fetchClientes() {
       this.loading = true;
       try {
-        const response = await api.get('clientes'); 
-        this.clientes = response.data;
+        // O Store chama o Service para obter os dados via Axios
+        const data = await clienteService.getAll(); 
+        this.clientes = data;
       } catch (error) {
-        console.error('Erro ao buscar clientes (Pinia):', error);
+        console.error('Erro ao buscar clientes (Service Layer):', error);
         Notify.create({
           type: 'negative',
-          message: 'Erro ao carregar lista de clientes.'
+          message: 'Erro ao carregar lista de clientes. Verifique o JSON Server.'
         });
       } finally {
         this.loading = false;
       }
     },
 
-    // Ação para adicionar/editar um cliente (CREATE/UPDATE)
-    // Embora o modal faça a chamada direta à API, esta ação é útil se precisar de lógica centralizada
-    async saveCliente() { // Remove clienteData
-    // Nota: Esta função é um placeholder, o evento 'clienteSaved' 
-    // será o que realmente aciona a atualização da lista.
-    await this.fetchClientes();
-    },
-
     // Ação para deletar um cliente (DELETE)
     async deleteCliente(id) {
       try {
-        await api.delete(`clientes/${id}`);
+        // O Store chama o Service para executar a exclusão
+        await clienteService.delete(id); 
         
-        // Remove da lista local (otimização)
+        // Otimização: Remove da lista local (reatividade imediata)
         this.clientes = this.clientes.filter(c => c.id !== id);
         
         Notify.create({
@@ -52,12 +45,17 @@ export const useClientesStore = defineStore('clientes', {
           message: 'Cliente excluído com sucesso!'
         });
       } catch (error) {
-        console.error('Erro ao excluir cliente (Pinia):', error);
+        console.error('Erro ao excluir cliente (Service Layer):', error);
         Notify.create({
           type: 'negative',
-          message: 'Erro ao excluir cliente.'
+          message: 'Erro ao excluir cliente. Tente novamente.'
         });
       }
+    },
+    
+    // Esta ação é apenas um helper para forçar a recarga após o modal fechar.
+    async saveCliente() {
+      await this.fetchClientes();
     },
   },
 });

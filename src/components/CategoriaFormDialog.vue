@@ -55,8 +55,8 @@
 
 <script setup>
 import { ref, watch, computed } from 'vue';
-import { api } from 'boot/axios';
 import { Notify } from 'quasar';
+import categoriaService from 'src/services/categoriaService'; // Importa o Service Layer
 
 const props = defineProps({
   modelValue: { type: Boolean, required: true },
@@ -93,14 +93,16 @@ async function saveCategoria() {
     const payload = {
       nome: categoriaData.value.nome,
       descricao: categoriaData.value.descricao,
-      valorDiaria: parseFloat(categoriaData.value.valorDiaria), // Garante que é um número
-      disponiveis: parseInt(categoriaData.value.disponiveis), // Garante que é um inteiro
+      valorDiaria: parseFloat(categoriaData.value.valorDiaria),
+      disponiveis: parseInt(categoriaData.value.disponiveis),
     };
     
     if (isEditing.value) {
-      await api.put(`categorias/${categoriaData.value.id}`, payload);
+      // Chama o SERVICE para UPDATE
+      await categoriaService.update(categoriaData.value.id, payload);
     } else {
-      await api.post('categorias', payload);
+      // Chama o SERVICE para CREATE
+      await categoriaService.create(payload);
     }
 
     Notify.create({ 
@@ -110,9 +112,9 @@ async function saveCategoria() {
     });
     
     emit('update:modelValue', false); 
-    emit('categoriaSaved'); // Notifica a página pai
+    emit('categoriaSaved');
   } catch (error) {
-    console.error('Erro ao salvar categoria:', error);
+    console.error('Erro ao salvar categoria (Service Layer):', error);
     Notify.create({ type: 'negative', message: `Erro ao salvar categoria.` });
   } finally {
     loading.value = false;
