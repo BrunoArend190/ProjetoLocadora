@@ -1,18 +1,39 @@
 <template>
   <q-layout view="lHh Lpr lFf">
+    
+    <q-header elevated class="bg-primary" v-if="$q.screen.lt.md">
+      <q-toolbar>
+        <q-btn
+          flat
+          dense
+          round
+          icon="menu"
+          aria-label="Menu"
+          @click="drawerOpen = !drawerOpen"
+        />
+        <q-toolbar-title>
+          ArendLocadora
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-header>
+
     <q-drawer
       show-if-above
-      :mini="miniState"
-      @mouseover="miniState = false"
-      @mouseout="miniState = true"
-      :width="200"
+      v-model="drawerOpen"
+      :width="220"
       :breakpoint="500"
       class="bg-dark-blue"
     >
       <q-scroll-area class="fit">
-        <div class="q-py-md text-white text-center">
-          <div class="text-h6">ArendLocadora</div>
-          <q-separator dark class="q-my-sm" />
+        
+        <div class="q-py-md text-white text-center q-mb-md">
+          <img
+            src="src/assets/logo.png"
+            alt="Logo ArendLocadora"
+            class="logo q-mb-sm"
+          />
+          <div class="text-h6 q-mt-xs">ArendLocadora</div>
+          <q-separator dark class="q-mt-md" />
         </div>
 
         <q-list padding dark>
@@ -35,6 +56,8 @@
 <script setup>
 import { ref } from 'vue';
 import EssentialLink from 'components/EssentialLink.vue';
+
+const drawerOpen = ref(true); 
 
 // Definição dos links de navegação para o menu lateral
 const essentialLinks = [
@@ -64,8 +87,6 @@ const essentialLinks = [
     link: '/dashboard/categorias',
   },
 ];
-
-const miniState = ref(true); // Começa "mini" e expande no hover
 </script>
 
 <style lang="scss">
@@ -73,6 +94,10 @@ const miniState = ref(true); // Começa "mini" e expande no hover
   background: #2f3651 !important; // Cor de fundo do menu lateral
   color: white;
 }
+.logo {
+  width: 80px; 
+}
+
 .q-drawer {
     .q-item {
         color: rgba(255, 255, 255, 0.7);
@@ -80,8 +105,8 @@ const miniState = ref(true); // Começa "mini" e expande no hover
 
         &.q-router-link--active {
             color: #fff;
-            background: rgba(255, 255, 255, 0.1);
-            border-left-color: #5887ff; // Cor de destaque do item ativo
+            background: rgba(255, 255, 255, 0.15); 
+            border-left-color: #5887ff; /* Cor de destaque do item ativo */
         }
     }
 }

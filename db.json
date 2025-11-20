@@ -76,6 +76,13 @@
       "cpf": "78123013388",
       "telefone": "4909312313",
       "email": "Chiq@gmail.com"
+    },
+    {
+      "id": "45b2",
+      "nome": "teste",
+      "cpf": "12313123",
+      "telefone": "12312",
+      "email": "3123@gmail.com"
     }
   ],
   "veiculos": [
@@ -111,7 +118,7 @@
       "placa": "IOP-0906",
       "marca": "Chevrolet",
       "modelo": "Cruze",
-      "disponibilidade": "Disponível",
+      "disponibilidade": "Indisponível",
       "quilometragem": 23000,
       "categoria": "Sedan"
     },
@@ -206,11 +213,11 @@
       "disponiveis": 4
     },
     {
-      "id": "759e",
       "nome": "tqsda",
       "descricao": "",
-      "valorDiaria": 12312,
-      "disponiveis": 0
+      "valorDiaria": 1110,
+      "disponiveis": 0,
+      "id": "759e"
     }
   ]
 }
